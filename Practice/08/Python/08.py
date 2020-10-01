@@ -1,0 +1,5 @@
+a, znak, b= map(str, input().split())
+if znak == '+': print(int(a)+int(b))
+if znak == '-': print(int(a)-int(b))
+if znak == '*': print(int(a)*int(b))
+if znak == '/': print(int(a)/int(b))
