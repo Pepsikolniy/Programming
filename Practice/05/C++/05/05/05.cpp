@@ -8,6 +8,7 @@ int main()
 	cin >> x0 >> v0 >> t;
 	if (t < 0) exit(0);
 	if (v0 < 0) exit(0);
-	cout <<x0 + v0 * t + g * t * t / 2;
+	int xt = x0 + v0 * t - g * t * t / 2;
+	cout << abs(xt - x0);
 
 }

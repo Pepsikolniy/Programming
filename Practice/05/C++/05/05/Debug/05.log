@@ -1,2 +1,3 @@
 ﻿  05.cpp
+C:\Users\isa21\source\repos\05\05\05.cpp(11,9): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных
   05.vcxproj -> C:\Users\isa21\source\repos\05\Debug\05.exe
