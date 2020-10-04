@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 using namespace std;
 
 int main()
@@ -7,7 +7,7 @@ int main()
 	int n, x, i;
 	x = 1;
 	i = 1;
-	cout << "Ââåäèòå ôàêòîðèàë öåëîãî ïîëîæèòåëüíîãî ÷èñëà: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð°ÐºÑ‚Ð¾Ñ€Ð¸Ð°Ð» Ñ†ÐµÐ»Ð¾Ð³Ð¾ Ð¿Ð¾Ð»Ð¾Ð¶Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ð³Ð¾ Ñ‡Ð¸ÑÐ»Ð°: ";
 	cin >> n;
 	if (n < 1) exit(0);
 	while (i <= n)

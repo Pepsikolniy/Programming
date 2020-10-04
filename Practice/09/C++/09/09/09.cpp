@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 using namespace std;
 
 int main()
@@ -21,6 +21,6 @@ int main()
 	h2 = 60 * h2;
 	m2 = h2;
 
-	if (abs(m1 - m2) > 15) cout << "Âñòðå÷à íå ñîñòîèòñÿ";
-	if (abs(m1 - m2) < 16) cout << "Âñòðå÷à ñîñòîèòñÿ";
+	if (abs(m1 - m2) > 15) cout << "Ð’ÑÑ‚Ñ€ÐµÑ‡Ð° Ð½Ðµ ÑÐ¾ÑÑ‚Ð¾Ð¸Ñ‚ÑÑ";
+	if (abs(m1 - m2) < 16) cout << "Ð’ÑÑ‚Ñ€ÐµÑ‡Ð° ÑÐ¾ÑÑ‚Ð¾Ð¸Ñ‚ÑÑ";
 }

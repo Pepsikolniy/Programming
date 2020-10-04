@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 using namespace std;
 
 int main()
@@ -14,6 +14,6 @@ int main()
 		if (n % i == 0) { a = true; break; }
 		i++;
 	}
-	if (a == false) cout << "Ïðîñòîå";
-	else cout << "Ñîñòàâíîå";
+	if (a == false) cout << "ÐŸÑ€Ð¾ÑÑ‚Ð¾Ðµ";
+	else cout << "Ð¡Ð¾ÑÑ‚Ð°Ð²Ð½Ð¾Ðµ";
 }
