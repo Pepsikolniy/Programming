@@ -1,0 +1,5 @@
+﻿  18.cpp
+C:\Users\isa21\source\repos\18\18\18.cpp(12,20): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\isa21\source\repos\18\18\18.cpp(14,21): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\isa21\source\repos\18\18\18.cpp(24,20): warning C4018: <: несоответствие типов со знаком и без знака
+  18.vcxproj -> C:\Users\isa21\source\repos\18\Debug\18.exe
