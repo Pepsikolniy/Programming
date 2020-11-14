@@ -1,4 +1,0 @@
-﻿  23.cpp
-C:\Users\isa21\source\repos\23\23\sin.h(10,70): warning C4244: аргумент: преобразование "double" в "int", возможна потеря данных
-C:\Users\isa21\source\repos\23\23\sin.h(11,12): warning C4244: return: преобразование "double" в "int", возможна потеря данных
-  23.vcxproj -> C:\Users\isa21\source\repos\23\Debug\23.exe
