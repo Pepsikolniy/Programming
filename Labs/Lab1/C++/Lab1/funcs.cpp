@@ -4,8 +4,8 @@
 using json = nlohmann::json;
 using namespace httplib;
 
-Client owm("http://api.openweathermap.org");
-Client time_srv("http://worldtimeapi.org");
+Client weather("http://api.openweathermap.org");
+Client timez("http://worldtimeapi.org");
 
 json cache;
 
@@ -18,7 +18,7 @@ void findAndReplaceAll(std::string& data, std::string toSearch, std::string repl
 }
 
 json get_json() {
-    auto res = owm.Get("/data/2.5/onecall?lat=44.952116&lon=34.102411&units=metric&exclude=current,minutely,daily,alerts&lang=ru&appid=b522dba7cc25f5d20be8b87eda9ec768");
+    auto res = weather.Get("/data/2.5/onecall?lat=44.952116&lon=34.102411&units=metric&exclude=current,minutely,daily,alerts&lang=ru&appid=b522dba7cc25f5d20be8b87eda9ec768");
     if (!res) {
         return ("Err");
     }
@@ -65,7 +65,7 @@ bool cache_json(json j) {
 }
 
 json get_time() {
-    auto time = time_srv.Get("/api/timezone/Europe/Simferopol");
+    auto time = timez.Get("/api/timezone/Europe/Simferopol");
     if (!time) {
         return("Err");
         return json::object();
