@@ -307,14 +307,12 @@ root.mainloop()
 ```
 
 ![](./pics/client.png)
-
-<h3 align="center">Рисунок 1. Клиент </h3> <br>
+<h3 align="center">Рисунок 1. Клиент </h3>
 
 
 
 ![](./pics/widget.png)
-
-<h3 align="center">Рисунок 2. Виджет </h3> <br>
+<h3 align="center">Рисунок 2. Виджет </h3>
 
 
 
