@@ -303,16 +303,15 @@ reload_data()
 root.mainloop()
 
 ```
+![](./pics/client.png)
 
-<h3 align="center"![](./pics/client.png)>
 <h3 align="center">Рисунок 1. Клиент </h3>
 
 
 
-<h3 align="center"![](./pics/widget.png)>
+![](./pics/widget.png)
+
 <h3 align="center">Рисунок 2. Виджет </h3>
-
-
 
 
 ## Вывод по работе. 
