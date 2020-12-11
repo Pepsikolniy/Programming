@@ -311,7 +311,7 @@ root.mainloop()
 
 
 <p align="center">
-![](./pics/widget.png)
+<img ="![](./pics/widget.png)">
 </p>
 
 <h3 align="center">Рисунок 2. Виджет </h3>
