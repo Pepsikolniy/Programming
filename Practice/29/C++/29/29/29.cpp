@@ -10,7 +10,7 @@ struct Student {
     string sName;
     int sgroup;
     Student(string Name, int group, int math, int phys, int hist, int prog) {
-        exams = { {"math", math},{"phys", phys},{"hist", hist},{"prog", prog} };
+        exams = { {"mathematics", math},{"physics", phys},{"history", hist},{"programming", prog} };
         sName = Name;
         sgroup = group;
     }
@@ -63,16 +63,17 @@ ostream& operator << (ostream& print, const vector<Student>& loxi) {
 int main() {
     srand(time(NULL));
     vector<Student> students = {
-                                    Student("WhosJoe",      1, 5, 4, 4, 3),
-                                    Student("Mathue",       2, 4, 4, 3, 4),
-                                    Student("JoJo",         3, 5, 5, 5, 5),
-                                    Student("Damedane",     9, 1, 3, 1, 1),
-                                    Student("Oama",         3, 3, 3, 3, 3),
-                                    Student("Dameyo",       0, 4, 5, 4, 3),
-                                    Student("BTSgay",       6, 3, 4, 3, 5),
-                                    Student("Dame",         0, 3, 3, 3, 3),
-                                    Student("UWUUWU",       5, 4, 3, 3, 1),
-                                    Student("Dameyu",       4, 5, 2, 3, 3) };
+                                    Student("Suleymanov I",   1, 5, 5, 5, 2),
+                                    Student("Ivanov I",       4, 2, 3, 3, 4),
+                                    Student("Ghoul Z",        3, 2, 2, 2, 2),
+                                    Student("Ghoul X",        9, 2, 2, 2, 2),
+                                    Student("Ghoul C",        3, 2, 2, 2, 2),
+                                    Student("Uzumaki N",      0, 4, 5, 4, 3),
+                                    Student("Hatake K",       6, 3, 4, 3, 5),
+                                    Student("Uchiha S",       0, 3, 3, 3, 3),
+                                    Student("Supec S",        5, 4, 3, 3, 1),
+                                    Student("Droog D",        4, 5, 2, 3, 3) 
+                                };
     vector<Student> dvoeshniki;
     int kolvo = 0;
     for (auto lox : students) {
