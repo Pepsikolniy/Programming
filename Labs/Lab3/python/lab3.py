@@ -4,12 +4,10 @@ import random
 
 def starting_game():
     global all_lbl
-    global used_tiles
     global help1, help2, help3
     help1 = random.randint(0,6)
     help2 = random.randint(0,6)
     help3 = random.randint(0,6)
-    used_tiles=[0]*81
     all_lbl=[]
     lbl_num=0
     for row in range(9):
@@ -19,6 +17,7 @@ def starting_game():
             lbl.col=row
             lbl.tile=lbl_num
             lbl.color=-1
+            lbl.used=False
             lbl.bind("<Button-1>", ball_active)
             lbl.place(x=(col*70) + 10,
                       y=(row*70) + 10)
@@ -28,29 +27,43 @@ def starting_game():
 def restarting_game(event):
     global clicked
     global all_lbl
-    all_lbl.clear()
-    starting_game()
-    set_balls()
-    clicked=False
-
-def new_game(event):
-    global clicked
-    global all_lbl
     global lbl_looser
-    lbl_looser.destroy()
+    global img_tile
+    lbl_looser=Label(root, text='                                                         ', font=('Arial', 40), bg="#414141")
+    lbl_looser.place(x=650, y=600)
     all_lbl.clear()
     starting_game()
     set_balls()
     clicked=False
-
+    
 def check_lines_horizontal():
     global all_lbl
+    same_color=[]
+    same_color.append(all_lbl[0])
+    for i in range(1,81):
+        if (i%9==0) and (i!=0):
+            if len(same_color)>4:
+                for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    
+            same_color.clear()
+            same_color.append(all_lbl[i])
+        if all_lbl[i].color == all_lbl[i-1].color:
+            same_color.append(all_lbl[i])
+        else:
+            if len(same_color)>4:
+                for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+            same_color.clear()
+            same_color.append(all_lbl[i])
 
 clicked=False
 def ball_active(event):
     global clicked
-    global used_tiles
-    global number_ball_to_move
     global img_tile
     global all_lbl
     global active_tile_num
@@ -67,8 +80,8 @@ def ball_active(event):
             clicked = True
     if clicked==True:
         if event.widget.color == -1:
-            used_tiles[event.widget.tile] = 1
-            used_tiles[active_tile_num] = 0
+            event.widget.used = True
+            all_lbl[active_tile_num].used = False
             event.widget.config(image=balls[ball_active_color])
             event.widget.color=ball_active_color
             all_lbl[active_tile_num].config(image=img_tile)
@@ -81,6 +94,7 @@ def ball_active(event):
                 event.widget.config(image=ball_active[event.widget.color])
                 active_tile_num = event.widget.tile
                 ball_active_color = event.widget.color
+                
 def next_move(event):
     set_balls()
     
@@ -94,21 +108,18 @@ def update_score():
     global score, x_score
     score.config(text=x_score)
     
-used_tiles=[0]*81
 def set_balls():
-    global used_tiles
     global all_lbl
     global help1, help2, help3
     global lbl_looser
     global img_blue, img_aqua, img_green, img_pink, img_red, img_violet, img_yellow
     balls = [img_blue, img_aqua, img_green, img_pink, img_red, img_violet, img_yellow]
     bool=True
-    random_color1, random_color2, random_color3 = random.randint(0,6),random.randint(0,6),random.randint(0,6)
     while(bool):
         random_tile1 = random.randint(0,80)
         random_tile2 = random.randint(0,80)
         random_tile3 = random.randint(0,80)
-        if (used_tiles[random_tile1]==0) and (used_tiles[random_tile2]==0) and (used_tiles[random_tile3]==0) and (random_tile1!=random_tile2) and (random_tile1!=random_tile3) and (random_tile2!=random_tile3):
+        if (all_lbl[random_tile1].used==False) and (all_lbl[random_tile2].used==False) and (all_lbl[random_tile3].used==False) and (random_tile1!=random_tile2) and (random_tile1!=random_tile3) and (random_tile2!=random_tile3):
             bool=False
     x1 = all_lbl[random_tile1].row
     y1 = all_lbl[random_tile1].col
@@ -121,6 +132,7 @@ def set_balls():
     all_lbl[random_tile1].row = x1
     all_lbl[random_tile1].col = y1
     all_lbl[random_tile1].tile = random_tile1
+    all_lbl[random_tile1].used = True
     all_lbl[random_tile1].bind("<Button-1>", ball_active)
     all_lbl[random_tile1].place(x=all_lbl[random_tile1].row*70 + 10,y=all_lbl[random_tile1].col*70 + 10)
     all_lbl[random_tile2] = Label(root, image=balls[help2], borderwidth=0)
@@ -128,6 +140,7 @@ def set_balls():
     all_lbl[random_tile2].row = x2
     all_lbl[random_tile2].col = y2
     all_lbl[random_tile2].tile = random_tile2
+    all_lbl[random_tile2].used = True
     all_lbl[random_tile2].bind("<Button-1>", ball_active)
     all_lbl[random_tile2].place(x=all_lbl[random_tile2].row*70 + 10,y=all_lbl[random_tile2].col*70 + 10)
     all_lbl[random_tile3] = Label(root, image=balls[help3], borderwidth=0)
@@ -135,11 +148,9 @@ def set_balls():
     all_lbl[random_tile3].row = x3
     all_lbl[random_tile3].col = y3
     all_lbl[random_tile3].tile = random_tile3
+    all_lbl[random_tile3].used = True
     all_lbl[random_tile3].bind("<Button-1>", ball_active)
     all_lbl[random_tile3].place(x=all_lbl[random_tile3].row*70 + 10,y=all_lbl[random_tile3].col*70 + 10)
-    used_tiles[random_tile1]=1
-    used_tiles[random_tile2]=1
-    used_tiles[random_tile3]=1
     print( random_tile1,all_lbl[random_tile1].row, all_lbl[random_tile1].col)
     help1,help2,help3=random.randint(0,6),random.randint(0,6),random.randint(0,6)
     help1_lbl=Label(root,image=balls[help1], borderwidth=0)
@@ -148,40 +159,14 @@ def set_balls():
     help2_lbl.place(x=730, y=290)
     help3_lbl=Label(root,image=balls[help3], borderwidth=0)
     help3_lbl.place(x=810, y=290)
+    check_lines_horizontal()
     sum=0
     for i in range(81):
-        sum+=used_tiles[i]
-        if sum >= 80:
-            lbl_looser=Label(root, text="4el, ti...", font=("Arial", 26), bg="#414141", fg="white")
-            lbl_looser.bind("<Button-1>", new_game)
-            lbl_looser.place(x=650,y=600)
-    #while(bool):
-    #    random_x1, random_y1 = random.randint(0,8), random.randint(0,8)
-    #    random_x2, random_y2 = random.randint(0,8), random.randint(0,8)
-    #    random_x3, random_y3 = random.randint(0,8), random.randint(0,8)
-    #    if (used_tiles[random_x1*random_y1]==0) and (used_tiles[random_x2*random_y2]==0) and (used_tiles[random_x3*random_y3]==0) and (random_x1*random_y1!=random_x2*random_y2) and (random_x1*random_y1!=random_x3*random_y3) and (random_x2*random_y2!=random_x3*random_y3):
-    #        bool=False
-    #all_lbl[random_x1*random_y1] = Label(root, image=balls[random_color1], borderwidth=0)
-    #all_lbl[random_x1*random_y1].color = random_color1
-    #all_lbl[random_x1*random_y1].row = random_x1
-    #all_lbl[random_x1*random_y1].col = random_y1
-    #all_lbl[random_x1*random_y1].bind("<Button-1>", ball_active)
-    #all_lbl[random_x1*random_y1].place(x=random_x1*70 + 10,y=random_y1*70 + 10)
-    #all_lbl[random_x2*random_y2] = Label(root, image=balls[random_color2], borderwidth=0)
-    #all_lbl[random_x2*random_y2].color = random_color2
-    #all_lbl[random_x2*random_y2].row = random_x2
-    #all_lbl[random_x2*random_y2].col = random_y2
-    #all_lbl[random_x2*random_y2].bind("<Button-1>", ball_active)
-    #all_lbl[random_x2*random_y2].place(x=random_x2*70 + 10,y=random_y2*70 + 10)
-    #all_lbl[random_x3*random_y3] = Label(root, image=balls[random_color3], borderwidth=0)
-    #all_lbl[random_x3*random_y3].color = random_color3
-    #all_lbl[random_x3*random_y3].row = random_x3
-    #all_lbl[random_x3*random_y3].col = random_y3
-    #all_lbl[random_x3*random_y3].bind("<Button-1>", ball_active)
-    #all_lbl[random_x3*random_y3].place(x=random_x3*70 + 10,y=random_y3*70 + 10)
-    #used_tiles[random_x1*random_y1]=1
-    #used_tiles[random_x2*random_y2]=1
-    #used_tiles[random_x3*random_y3]=1
+        if all_lbl[i].used==True:
+            sum+=1
+            if sum > 80:
+                lbl_looser=Label(root, text="Вы проиграли", font=("Arial", 26), bg="#414141", fg="white")
+                lbl_looser.place(x=650,y=600)
 
 root = Tk()
 root.configure(bg="#414141")
