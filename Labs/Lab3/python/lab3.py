@@ -150,6 +150,7 @@ def restarting_game(event):
 
 def check_lines_vertical():
     global all_lbl
+    global x_score
     matrix_lbl=[]
     index = 0
     for i in range (9):
@@ -178,21 +179,24 @@ def check_lines_vertical():
             if(matrix_lbl[col][row].color==matrix_lbl[col-1][row].color):
                 same_color.append(matrix_lbl[col][row])
             else:
-                if len(same_color)>4:
+                if len(same_color)>4 and same_color[0].color != -1:
                     for j in range(len(same_color)):
                         same_color[j].config(image=img_tile)
                         same_color[j].color = -1
                         same_color[j].used = False
+                        x_score += 2
                 same_color.clear()
                 same_color.append(matrix_lbl[col][row])
-            if(col==8) and (len(same_color)>4):
+            if(col==8) and (len(same_color)>4) and same_color[0].color != -1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
                     same_color[j].used = False
+                    x_score += 2
                 same_color.clear()
             if(col == 8):
                 same_color.clear()
+    update_score()
     
 def check_lines_horizontal():
     global all_lbl
