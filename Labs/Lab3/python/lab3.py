@@ -5,6 +5,8 @@ import random
 def starting_game():
     global all_lbl
     global help1, help2, help3
+    global x_score
+    x_score = 0
     help1 = random.randint(0,6)
     help2 = random.randint(0,6)
     help3 = random.randint(0,6)
@@ -35,31 +37,197 @@ def restarting_game(event):
     starting_game()
     set_balls()
     clicked=False
-    
-def check_lines_horizontal():
+
+
+#def check_lines_diagonal_left_right_1():
+#    global all_lbl
+#    matrix_lbl=[]
+#    index = 0
+#    for i in range (9):
+#        temp =[]
+#        for j in range(9):
+#            temp.append(all_lbl[index])
+#            index +=1
+#        matrix_lbl.append(temp)
+#    same_color=[]
+#    max_col = 9
+#    max_row = 9
+#    for row in range (1,max_row):
+#        k = row
+#        same_color.append(matrix_lbl[0][k])
+#        for col in range (max_col): 
+#            k = k+1
+#            if(matrix_lbl[k][col].color==matrix_lbl[k-1][col-1].color):
+#                same_color.append(matrix_lbl[k][col])
+#            else:
+#                if len(same_color)>4:
+#                    for j in range(len(same_color)):
+#                        same_color[j].config(image=img_tile)
+#                        same_color[j].color = -1
+#                        same_color[j].used = False
+#                same_color.clear()
+#                same_color.append(matrix_lbl[col][col])
+#            if(k==8) and (len(same_color)>4):
+#                for j in range(len(same_color)):
+#                    same_color[j].config(image=img_tile)
+#                    same_color[j].color = -1
+#                    same_color[j].used = False
+#                same_color.clear()
+#            if(k == 8):
+#                same_color.clear()
+
+#def check_lines_diagonal_left_right_down():
+#    global all_lbl
+#    matrix_lbl=[]
+#    index = 0
+#    for i in range (9):
+#        temp =[]
+#        for j in range(9):
+#            temp.append(all_lbl[index])
+#            index +=1
+#        matrix_lbl.append(temp)
+#    same_color=[]
+#    for row in range (5):
+#        k = row
+#        same_color.append(matrix_lbl[0][k])
+#        for col in range (6,9): 
+#            k = k+1
+#            if(matrix_lbl[col][k].color==matrix_lbl[col-1][k-1].color):
+#                same_color.append(matrix_lbl[col][k])
+#            else:
+#                if len(same_color)>4:
+#                    for j in range(len(same_color)):
+#                        same_color[j].config(image=img_tile)
+#                        same_color[j].color = -1
+#                        same_color[j].used = False
+#                same_color.clear()
+#                same_color.append(matrix_lbl[col][k])
+#            if(col==8) and (len(same_color)>4):
+#                for j in range(len(same_color)):
+#                    same_color[j].config(image=img_tile)
+#                    same_color[j].color = -1
+#                    same_color[j].used = False
+#                same_color.clear()
+#            if(col == 8):
+#                same_color.clear()
+
+
+
+#def check_lines_diagonal_right_left_up():          работает область, но не всё
+#    global all_lbl
+#    matrix_lbl=[]
+#    index = 0
+#    for i in range (9):
+#        temp =[]
+#        for j in range(9):
+#            temp.append(all_lbl[index])
+#            index +=1
+#        matrix_lbl.append(temp)
+#    same_color=[]
+#    for row in range (8,3,-1):
+#        k = row
+#        same_color.append(matrix_lbl[0][k])
+#        for col in range (1,5): 
+#            k = k-1
+#            if(matrix_lbl[col][k].color==matrix_lbl[col-1][k+1].color):
+#                same_color.append(matrix_lbl[col][k])
+#            else:
+#                if len(same_color)>4:
+#                    for j in range(len(same_color)):
+#                        same_color[j].config(image=img_tile)
+#                        same_color[j].color = -1
+#                        same_color[j].used = False
+#                same_color.clear()
+#                same_color.append(matrix_lbl[col][k])
+#            if(col==4) and (len(same_color)>4):
+#                for j in range(len(same_color)):
+#                    same_color[j].config(image=img_tile)
+#                    same_color[j].color = -1
+#                    same_color[j].used = False
+#                same_color.clear()
+#            if(col == 4):
+#                same_color.clear()
+
+def check_lines_vertical():
     global all_lbl
+    matrix_lbl=[]
+    index = 0
+    for i in range (9):
+        temp =[]
+        for j in range(9):
+            temp.append(all_lbl[index])
+            index +=1
+        matrix_lbl.append(temp)
     same_color=[]
-    same_color.append(all_lbl[0])
-    for i in range(1,81):
-        if (i%9==0) and (i!=0):
-            if len(same_color)>4:
+    for row in range (9):
+        same_color.append(matrix_lbl[0][row])
+        for col in range (1,9):
+            #if (col==1) :
+            #    if len(same_color)>4:
+            #        for j in range(len(same_color)):
+            #            same_color[j].config(image=img_tile)
+            #            same_color[j].color = -1
+            #            same_color[j].used = False
+                    
+            #    same_color.clear()
+            #    same_color.append(matrix_lbl[col][row])
+            #elif len(same_color)>4:
+            #    same_color.clear()
+            #    same_color.append(matrix_lbl[col][row])
+
+            if(matrix_lbl[col][row].color==matrix_lbl[col-1][row].color):
+                same_color.append(matrix_lbl[col][row])
+            else:
+                if len(same_color)>4:
+                    for j in range(len(same_color)):
+                        same_color[j].config(image=img_tile)
+                        same_color[j].color = -1
+                        same_color[j].used = False
+                same_color.clear()
+                same_color.append(matrix_lbl[col][row])
+            if(col==8) and (len(same_color)>4):
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
                     same_color[j].used = False
-                    
+                same_color.clear()
+            if(col == 8):
+                same_color.clear()
+    
+def check_lines_horizontal():
+    global all_lbl
+    global x_score
+    same_color=[]
+    same_color.append(all_lbl[0])
+    for i in range(1,81):
+        if (i%9==0) and (i!=0):
+            if len(same_color)>4 and same_color[0].color!=-1:
+                for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score+=2
             same_color.clear()
             same_color.append(all_lbl[i])
         if all_lbl[i].color == all_lbl[i-1].color:
             same_color.append(all_lbl[i])
         else:
-            if len(same_color)>4:
+            if len(same_color)>4 and same_color[0].color!=-1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
                     same_color[j].used = False
+                    x_score+=2
             same_color.clear()
             same_color.append(all_lbl[i])
+        if(i == 80) and (len(same_color)>4) and same_color[0].color != -1:
+            for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score+=2
+            same_color.clear()
+    update_score()
 
 clicked=False
 def ball_active(event):
@@ -159,7 +327,11 @@ def set_balls():
     help2_lbl.place(x=730, y=290)
     help3_lbl=Label(root,image=balls[help3], borderwidth=0)
     help3_lbl.place(x=810, y=290)
-    check_lines_horizontal()
+    check_lines_horizontal()        #по горизонтали
+    check_lines_vertical()          #по вертикали
+    #check_lines_diagonal_left_right_1()
+    #check_lines_diagonal_right_left_up()
+    #check_lines_diagonal_left_right_down()
     sum=0
     for i in range(81):
         if all_lbl[i].used==True:
@@ -268,3 +440,4 @@ lbl_next_move.place(x=650, y=440)
 starting_game()
 set_balls()
 root.mainloop()
+
