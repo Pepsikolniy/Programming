@@ -39,114 +39,76 @@ def restarting_game(event):
     clicked=False
 
 
-#def check_lines_diagonal_left_right_1():
-#    global all_lbl
-#    matrix_lbl=[]
-#    index = 0
-#    for i in range (9):
-#        temp =[]
-#        for j in range(9):
-#            temp.append(all_lbl[index])
-#            index +=1
-#        matrix_lbl.append(temp)
-#    same_color=[]
-#    max_col = 9
-#    max_row = 9
-#    for row in range (1,max_row):
-#        k = row
-#        same_color.append(matrix_lbl[0][k])
-#        for col in range (max_col): 
-#            k = k+1
-#            if(matrix_lbl[k][col].color==matrix_lbl[k-1][col-1].color):
-#                same_color.append(matrix_lbl[k][col])
-#            else:
-#                if len(same_color)>4:
-#                    for j in range(len(same_color)):
-#                        same_color[j].config(image=img_tile)
-#                        same_color[j].color = -1
-#                        same_color[j].used = False
-#                same_color.clear()
-#                same_color.append(matrix_lbl[col][col])
-#            if(k==8) and (len(same_color)>4):
-#                for j in range(len(same_color)):
-#                    same_color[j].config(image=img_tile)
-#                    same_color[j].color = -1
-#                    same_color[j].used = False
-#                same_color.clear()
-#            if(k == 8):
-#                same_color.clear()
+def check_lines_diagonal(k):
+    global all_lbl
+    global x_score
+    same_color=[]
+    i = k
+    for i in range(i,81,10):
+        if(i < 18):
+            k = i
+            same_color.append(all_lbl[i-10])
+        if all_lbl[i].color == all_lbl[i-10].color:
+            same_color.append(all_lbl[i])
+        else:
+            if len(same_color)>4 and same_color[0].color != -1:
+                for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score += 2
+            same_color.clear()
+            same_color.append(all_lbl[i])
+        if(i > 71) and (len(same_color)>4) and same_color[0].color != -1:
+            for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score += 2
+            same_color.clear()
+    if(k < 81):
+        check_lines_diagonal(k+1)
+    update_score()
 
-#def check_lines_diagonal_left_right_down():
-#    global all_lbl
-#    matrix_lbl=[]
-#    index = 0
-#    for i in range (9):
-#        temp =[]
-#        for j in range(9):
-#            temp.append(all_lbl[index])
-#            index +=1
-#        matrix_lbl.append(temp)
-#    same_color=[]
-#    for row in range (5):
-#        k = row
-#        same_color.append(matrix_lbl[0][k])
-#        for col in range (6,9): 
-#            k = k+1
-#            if(matrix_lbl[col][k].color==matrix_lbl[col-1][k-1].color):
-#                same_color.append(matrix_lbl[col][k])
-#            else:
-#                if len(same_color)>4:
-#                    for j in range(len(same_color)):
-#                        same_color[j].config(image=img_tile)
-#                        same_color[j].color = -1
-#                        same_color[j].used = False
-#                same_color.clear()
-#                same_color.append(matrix_lbl[col][k])
-#            if(col==8) and (len(same_color)>4):
-#                for j in range(len(same_color)):
-#                    same_color[j].config(image=img_tile)
-#                    same_color[j].color = -1
-#                    same_color[j].used = False
-#                same_color.clear()
-#            if(col == 8):
-#                same_color.clear()
-
-
-
-#def check_lines_diagonal_right_left_up():          работает область, но не всё
-#    global all_lbl
-#    matrix_lbl=[]
-#    index = 0
-#    for i in range (9):
-#        temp =[]
-#        for j in range(9):
-#            temp.append(all_lbl[index])
-#            index +=1
-#        matrix_lbl.append(temp)
-#    same_color=[]
-#    for row in range (8,3,-1):
-#        k = row
-#        same_color.append(matrix_lbl[0][k])
-#        for col in range (1,5): 
-#            k = k-1
-#            if(matrix_lbl[col][k].color==matrix_lbl[col-1][k+1].color):
-#                same_color.append(matrix_lbl[col][k])
-#            else:
-#                if len(same_color)>4:
-#                    for j in range(len(same_color)):
-#                        same_color[j].config(image=img_tile)
-#                        same_color[j].color = -1
-#                        same_color[j].used = False
-#                same_color.clear()
-#                same_color.append(matrix_lbl[col][k])
-#            if(col==4) and (len(same_color)>4):
-#                for j in range(len(same_color)):
-#                    same_color[j].config(image=img_tile)
-#                    same_color[j].color = -1
-#                    same_color[j].used = False
-#                same_color.clear()
-#            if(col == 4):
-#                same_color.clear()
+def check_lines_diagonal_back(k):
+    global x_score
+    global all_lbl
+    same_color=[]
+    i = k
+    for i in range(i,-1,-8):
+        if(i > 62 and i!=63):
+            k = i
+            same_color.append(all_lbl[i+8])
+        if all_lbl[i].color == all_lbl[i+8].color:
+            same_color.append(all_lbl[i])
+        else:
+            if len(same_color)>4 and same_color[0].color != -1:
+                for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score += 2
+            same_color.clear()
+            same_color.append(all_lbl[i])
+        if(i < 9) and (len(same_color)>4) and same_color[0].color != -1:
+            for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score += 2
+            same_color.clear()
+        if(i % 9 ==8)and (len(same_color)>4) and same_color[0].color != -1:
+            for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    xscore += 2
+            same_color.clear()
+        update_score()
+        if(i%9 == 8):
+            break
+    if(k > -1):
+        check_lines_diagonal_back(k-1)
 
 def check_lines_vertical():
     global all_lbl
@@ -163,19 +125,6 @@ def check_lines_vertical():
     for row in range (9):
         same_color.append(matrix_lbl[0][row])
         for col in range (1,9):
-            #if (col==1) :
-            #    if len(same_color)>4:
-            #        for j in range(len(same_color)):
-            #            same_color[j].config(image=img_tile)
-            #            same_color[j].color = -1
-            #            same_color[j].used = False
-                    
-            #    same_color.clear()
-            #    same_color.append(matrix_lbl[col][row])
-            #elif len(same_color)>4:
-            #    same_color.clear()
-            #    same_color.append(matrix_lbl[col][row])
-
             if(matrix_lbl[col][row].color==matrix_lbl[col-1][row].color):
                 same_color.append(matrix_lbl[col][row])
             else:
@@ -269,13 +218,7 @@ def ball_active(event):
                 
 def next_move(event):
     set_balls()
-    
-def set_img_tile_active(event):
-    event.widget.config(image=img_tile_active)
-    global x_score
-    x_score += 1
-    update_score()
-    
+
 def update_score():
     global score, x_score
     score.config(text=x_score)
@@ -333,14 +276,13 @@ def set_balls():
     help3_lbl.place(x=810, y=290)
     check_lines_horizontal()        #по горизонтали
     check_lines_vertical()          #по вертикали
-    #check_lines_diagonal_left_right_1()
-    #check_lines_diagonal_right_left_up()
-    #check_lines_diagonal_left_right_down()
+    check_lines_diagonal(9)         #по диагонали
+    check_lines_diagonal_back(70)   #по обратной диагонали
     sum=0
     for i in range(81):
         if all_lbl[i].used==True:
             sum+=1
-            if sum > 80:
+            if sum >= 81:
                 lbl_looser=Label(root, text="Вы проиграли", font=("Arial", 26), bg="#414141", fg="white")
                 lbl_looser.place(x=650,y=600)
 
@@ -444,4 +386,3 @@ lbl_next_move.place(x=650, y=440)
 starting_game()
 set_balls()
 root.mainloop()
-

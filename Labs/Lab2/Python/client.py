@@ -17,7 +17,7 @@ def writeexel():
     book.close
     buffer.clear()
     
-app = Flask(__name__)  
+app = Flask(__name__)   
 @app.route('/', methods = ['POST', 'GET'])
 def index():
     if request.method == 'POST':
@@ -31,6 +31,7 @@ def index():
         if len(buffer)>5:
             writeexel()
         return 'OK'
+    return "Vse rabotayet"
     
 if __name__ == "__main__":
     global number, buffer, line
