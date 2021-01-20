@@ -48,10 +48,16 @@ def check_lines_diagonal(k):
         if(i < 18):
             k = i
             same_color.append(all_lbl[i-10])
+        if len(same_color)==5 and same_color[0].color != -1:
+            for j in range(len(same_color)):
+                same_color[j].config(image=img_tile)
+                same_color[j].color = -1
+                same_color[j].used = False
+                x_score += 2
         if all_lbl[i].color == all_lbl[i-10].color:
             same_color.append(all_lbl[i])
         else:
-            if len(same_color)>4 and same_color[0].color != -1:
+            if len(same_color)==5 and same_color[0].color != -1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -59,7 +65,7 @@ def check_lines_diagonal(k):
                     x_score += 2
             same_color.clear()
             same_color.append(all_lbl[i])
-        if(i > 71) and (len(same_color)>4) and same_color[0].color != -1:
+        if(i > 71) and (len(same_color)==5) and same_color[0].color != -1:
             for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -82,7 +88,7 @@ def check_lines_diagonal_back(k):
         if all_lbl[i].color == all_lbl[i+8].color:
             same_color.append(all_lbl[i])
         else:
-            if len(same_color)>4 and same_color[0].color != -1:
+            if len(same_color)==5 and same_color[0].color != -1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -90,14 +96,14 @@ def check_lines_diagonal_back(k):
                     x_score += 2
             same_color.clear()
             same_color.append(all_lbl[i])
-        if(i < 9) and (len(same_color)>4) and same_color[0].color != -1:
+        if(i < 9) and (len(same_color)==5) and same_color[0].color != -1:
             for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
                     same_color[j].used = False
                     x_score += 2
             same_color.clear()
-        if(i % 9 ==8)and (len(same_color)>4) and same_color[0].color != -1:
+        if(i % 9 ==8)and (len(same_color)==5) and same_color[0].color != -1:
             for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -125,10 +131,16 @@ def check_lines_vertical():
     for row in range (9):
         same_color.append(matrix_lbl[0][row])
         for col in range (1,9):
+            if len(same_color)==5 and same_color[0].color != -1:
+                for j in range(len(same_color)):
+                    same_color[j].config(image=img_tile)
+                    same_color[j].color = -1
+                    same_color[j].used = False
+                    x_score += 2
             if(matrix_lbl[col][row].color==matrix_lbl[col-1][row].color):
                 same_color.append(matrix_lbl[col][row])
             else:
-                if len(same_color)>4 and same_color[0].color != -1:
+                if len(same_color)==5 and same_color[0].color != -1:
                     for j in range(len(same_color)):
                         same_color[j].config(image=img_tile)
                         same_color[j].color = -1
@@ -136,7 +148,7 @@ def check_lines_vertical():
                         x_score += 2
                 same_color.clear()
                 same_color.append(matrix_lbl[col][row])
-            if(col==8) and (len(same_color)>4) and same_color[0].color != -1:
+            if(col==8) and (len(same_color)==5) and same_color[0].color != -1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -154,7 +166,7 @@ def check_lines_horizontal():
     same_color.append(all_lbl[0])
     for i in range(1,81):
         if (i%9==0) and (i!=0):
-            if len(same_color)>4 and same_color[0].color!=-1:
+            if len(same_color)==5 and same_color[0].color!=-1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -162,10 +174,16 @@ def check_lines_horizontal():
                     x_score+=2
             same_color.clear()
             same_color.append(all_lbl[i])
+        if len(same_color)==5 and same_color[0].color!=-1:
+            for j in range(len(same_color)):
+                same_color[j].config(image=img_tile)
+                same_color[j].color = -1
+                same_color[j].used = False
+                x_score+=2
         if all_lbl[i].color == all_lbl[i-1].color:
             same_color.append(all_lbl[i])
         else:
-            if len(same_color)>4 and same_color[0].color!=-1:
+            if len(same_color)==5 and same_color[0].color!=-1:
                 for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -173,7 +191,7 @@ def check_lines_horizontal():
                     x_score+=2
             same_color.clear()
             same_color.append(all_lbl[i])
-        if(i == 80) and (len(same_color)>4) and same_color[0].color != -1:
+        if(i == 80) and (len(same_color)==5) and same_color[0].color != -1:
             for j in range(len(same_color)):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
@@ -327,7 +345,7 @@ def set_balls():
     help2_lbl.place(x=730, y=290)
     help3_lbl=Label(root,image=balls[help3], borderwidth=0)
     help3_lbl.place(x=810, y=290)
-    temp_matrix(all_lbl)
+    #temp_matrix(all_lbl)
     check_lines_horizontal()        #по горизонтали
     check_lines_vertical()          #по вертикали
     check_lines_diagonal(9)         #по диагонали
