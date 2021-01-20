@@ -108,7 +108,7 @@ def check_lines_diagonal_back(k):
                     same_color[j].config(image=img_tile)
                     same_color[j].color = -1
                     same_color[j].used = False
-                    xscore += 2
+                    x_score += 2
             same_color.clear()
         update_score()
         if(i%9 == 8):
