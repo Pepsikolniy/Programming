@@ -11,12 +11,13 @@ def sort(arr, length):
         arr[j+1] = temp
     return arr
 
-def pprint(array, length):
-    print (array)
+_print = print
+def print(array, length):
+    _print (array)
 
 length = int(input())
 first_num = int(input())
 step = int(input())
 arr = create(length, first_num, step)
 sort(arr, length)
-pprint(arr, length)
+print(arr, length)
