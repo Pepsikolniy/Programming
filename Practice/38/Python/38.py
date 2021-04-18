@@ -81,7 +81,7 @@ class Rational:
 
     def __float__(self):
         if self.denominator == 0 and self.numerator !=0:
-            return math.inf
+            return math.inf if self.sign == 0 else self.sign*math.inf
         elif self.denominator == 0 and self.numerator == 0:
             return math.nan
         else:

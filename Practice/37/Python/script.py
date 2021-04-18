@@ -62,12 +62,12 @@ class Point:
         return True if (abs(self.x - other.x) < 10**-10) and (abs(self.y - other.y) < 10**-10) else False
 
 class Vector:
-    def __init__(self, begin = 0, end = 0):
-        if begin == 0:
+    def __init__(self, begin = None, end = None):
+        if begin == None and end == None:
             self.point = Point(1,0)
-        elif begin == 0:
+        elif begin == None and end != None:
             self.point = end
-        elif end == 0:
+        elif end == None and begin != None:
             self.point = begin
         else:
             self.point = Point(end.get_x() - begin.get_x(), end.get_y() - begin.get_y())
