@@ -1,0 +1,32 @@
+[
+  {
+    "bestScore": 23,
+    "games": 4,
+    "login": "tankist",
+    "password": "tankist"
+  },
+  {
+    "bestScore": 26,
+    "games": 2,
+    "login": "loban",
+    "password": "loban"
+  },
+  {
+    "bestScore": 100,
+    "games": 28,
+    "login": "isa",
+    "password": "isa"
+  },
+  {
+    "bestScore": 30,
+    "games": 15,
+    "login": "BOSS",
+    "password": "BOSS"
+  },
+  {
+    "bestScore": 42,
+    "games": 10,
+    "login": "enver",
+    "password": "enver"
+  }
+]
