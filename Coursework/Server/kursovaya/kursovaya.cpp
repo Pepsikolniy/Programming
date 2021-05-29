@@ -28,7 +28,7 @@ void entry(const Request& req, Response& res)
     input.close();
 
     for (auto& user : j) {
-        if (user["login"] == JSON["login"] && user["password"] == JSON["password"])
+        if (user["login"] == JSON["login"] && user["password"] == JSON["password"] && JSON["login"]!="" && JSON["password"]!="")
         {
             res.set_content("Logged in", "text/plain");
             cout << "Logged in" << endl;
@@ -73,16 +73,24 @@ void registration(const Request& req, Response& res)
     }
     if (!have_same)
     {
-        j.push_back(
-            {
-                {"login", JSON["login"]},
-                {"password", JSON["password"]},
-                {"games", 1},
-                {"bestScore", 1}
-            }
-        );
-        cout << "You have successfully registered an account" << endl;
-        res.set_content("You have successfully registered an account", "text/plain");
+        if (JSON["login"] != "" && JSON["password"] != "")
+        {
+            j.push_back(
+                {
+                    {"login", JSON["login"]},
+                    {"password", JSON["password"]},
+                    {"games", 0},
+                    {"bestScore", 0}
+                }
+            );
+            cout << "You have successfully registered an account" << endl;
+            res.set_content("You have successfully registered an account", "text/plain");
+        }
+        else
+        {
+            cout << "Empty input labels" << endl;
+            res.set_content("Empty input labels", "text/plain");
+        }
     }
 
     ofstream users("users.json");

@@ -26,6 +26,7 @@ BLUE = (0, 0, 255)
 # Настройка папки ассетов
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')
+sounds_folder = os.path.join(game_folder, 'sounds')
 
 # Загружаем все необходимые картинки
 bg_in_game = pygame.image.load(os.path.join(img_folder, 'bg_in_game.jpg'))
@@ -90,8 +91,8 @@ player_img = pygame.image.load(os.path.join(img_folder, 'idle.png'))
 
 # Загружаем музыку
 pygame.mixer.init()
-sound_eating = pygame.mixer.Sound(os.path.join(game_folder,'eating.mp3'))
-sound_damage = pygame.mixer.Sound(os.path.join(game_folder,'minecraft_damage.mp3'))
+sound_eating = pygame.mixer.Sound(os.path.join(sounds_folder,'eating.mp3'))
+sound_damage = pygame.mixer.Sound(os.path.join(sounds_folder,'minecraft_damage.mp3'))
 
 # Создаём спрайт игрового персонажа
 class Player(pygame.sprite.Sprite):
@@ -549,8 +550,10 @@ while running:
                     player.rect.bottom = i.rect.top - 1
                     player.gravitation_count = 2
             if score >= speedUp+10:
-                pizza_speed += 0.5
-                tile_speed += 0.4
+                pizza_speed += 0.3
+                tile_speed += 0.2
+                PIZZA_SPAWN_TIME -= 0.05
+                TILE_SPAWN_TIME -= 0.05
                 speedUp += 10
 
         # Отрисовка
