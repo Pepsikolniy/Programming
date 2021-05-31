@@ -134,16 +134,11 @@ class Player(pygame.sprite.Sprite):
                 self.left = True
                 if not move_is_blocked_left:
                     self.rect.x -= self.speed
-            elif keys[pygame.K_UP]:
-                self.rect.y -= 3
 
             else:
                 self.right = False
                 self.left = False
                 self.animCount = 0
-            '''if not(move_is_blocked_top):
-                self.rect.y += 1'''
-
 
             #if not move_is_blocked_top:
             if not(self.is_jump):
